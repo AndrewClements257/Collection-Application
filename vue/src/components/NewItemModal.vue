@@ -19,6 +19,7 @@
 import ItemService from '../services/ItemService';
 
 export default {
+  name: "new-item-modal",
   data() {
     return {
       selectedFile: null,

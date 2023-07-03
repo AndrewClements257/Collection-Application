@@ -42,6 +42,33 @@ namespace Capstone.DAO
             return list;
         }
 
+        public Item GetItemByItemID(int itemID)
+        {
+            Item item = new Item();
+
+            try
+            {
+                using(SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM item WHERE item_id = @item_id",conn);
+                    cmd.Parameters.AddWithValue("@item_id", itemID);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        item = GetItemFromReader(reader);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw new Exception("Something went wrong");
+            }
+            return item;
+        }
+
         public bool CreateNewItem(Item item)
         {
             try
@@ -80,7 +107,7 @@ namespace Capstone.DAO
             }
         }
 
-        public bool DeleteItem(int item_id)
+        public bool DeleteItem(int selectedItemID)
         {
             int rowsAffected;
             try
@@ -90,7 +117,7 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand("DELETE FROM item WHERE item_id = @item_id;", conn);
-                    cmd.Parameters.AddWithValue("@item_id", item_id);
+                    cmd.Parameters.AddWithValue("@item_id", selectedItemID);
 
                     cmd.ExecuteNonQuery();
                     rowsAffected = cmd.ExecuteNonQuery();

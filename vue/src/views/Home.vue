@@ -5,6 +5,7 @@
     <collections-list class="list"></collections-list>
     <button v-on:click="displayCollectionModal()">Add New Collection</button>
     <button v-on:click="displayItemModal()">Add New Item</button>
+    <button v-on:click="displayDeleteItemModal()">Delete Item</button>
     </div>
     <div class="overlay" v-show="showingCollectionModal">
     <new-collection-modal v-show="showingCollectionModal" @close="close"></new-collection-modal>
@@ -12,6 +13,9 @@
     <div class="overlay" v-show="showingItemModal">
       <img :src="imageUrl" alt="Uploaded Image" v-if="imageUrl" />
       <new-item-modal v-show="showingItemModal" @close="close"></new-item-modal>
+    </div>
+    <div class="overlay" v-show="showingDeleteItemModal">
+      <delete-item-modal v-show="showingDeleteItemModal" @close="close"></delete-item-modal>
     </div>
     <user-collection class="collection"></user-collection>
   </div>
@@ -23,6 +27,7 @@ import UserCollection from '../components/UserCollection.vue';
 import CollectionsList from '../components/CollectionsList.vue';
 import NewCollectionModal from '../components/NewCollectionModal.vue';
 import NewItemModal from '../components/NewItemModal.vue';
+import DeleteItemModal from '../components/DeleteItemModal.vue';
 
 export default {
   name: "home",
@@ -31,12 +36,14 @@ export default {
     UserCollection,
     CollectionsList,
     NewCollectionModal,
-    NewItemModal
+    NewItemModal,
+    DeleteItemModal
   },
   data() {
     return{
     showingCollectionModal: false,
     showingItemModal: false,
+    showingDeleteItemModal: false,
     imageUrl: ''
     }
   },
@@ -47,9 +54,13 @@ export default {
   async displayItemModal() {
     this.showingItemModal = !this.showingItemModal;
   },
+  async displayDeleteItemModal() {
+    this.showingDeleteItemModal = !this.showingDeleteItemModal;
+  },
   close() {
       this.showingCollectionModal = false;
       this.showingItemModal = false;
+      this.showingDeleteItemModal = false;
     },
   }
 };

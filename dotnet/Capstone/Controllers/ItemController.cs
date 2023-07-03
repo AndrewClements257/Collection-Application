@@ -16,10 +16,16 @@ namespace Capstone.Controllers
             itemDao = _itemDao;
         }
 
-        [HttpGet("{collection_id}")]
+        [HttpGet("Collection/{collection_id}")]
         public List<Item> GetItemsByID(int collection_id)
         {
             return itemDao.GetItemsByCollectionID(collection_id);
+        }
+
+        [HttpGet("{item_id}")]
+        public Item GetItemByID(int item_id)
+        {
+            return itemDao.GetItemByItemID(item_id);
         }
 
         [HttpPost]
@@ -29,9 +35,9 @@ namespace Capstone.Controllers
         }
 
         [HttpDelete]
-        public bool DeleteItem(int item_id)
+        public bool DeleteItem(int selectedItemID)
         {
-            return itemDao.DeleteItem(item_id);
+            return itemDao.DeleteItem(selectedItemID);
         }
 
         [HttpPost("upload")]
@@ -61,11 +67,11 @@ namespace Capstone.Controllers
             }
         }
 
-        [HttpDelete("delete/{filename}")]
-        public IActionResult DeleteImage(string filename)
+        [HttpDelete("DeleteImage")]
+        public IActionResult DeleteImage([FromQuery] string imageName)
         {
             // Set the path to the image file
-            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "../../vue/src/images", filename);
+            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "../../vue/src/images", imageName);
 
             if (System.IO.File.Exists(imagePath))
             {

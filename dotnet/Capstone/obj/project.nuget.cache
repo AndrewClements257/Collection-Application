@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sOHjd8hoZ923erV8ygpayfy89pe4hrdbqSimTgbJvpn/FZK6/+CzNA6jUbdjQQk8Ku8w9KDODx0jKupmZGhVbA==",
+  "dgSpecHash": "4sBxqfQfBiAgr5WF45qROk/rTW1/CtfFeIOzx/R1gCirKvd/+VPkJenXpDZRcxIBw1rtoIPiOqDI+JD8EmoiKA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\spidy\\workspace\\collection-app\\dotnet\\Capstone\\Capstone.csproj",
+  "projectFilePath": "C:\\Users\\spidy\\workspace\\Collection-Application\\dotnet\\Capstone\\Capstone.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\spidy\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.9\\microsoft.aspnetcore.authentication.jwtbearer.3.1.9.nupkg.sha512",
     "C:\\Users\\spidy\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
