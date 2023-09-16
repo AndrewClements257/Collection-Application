@@ -1,15 +1,18 @@
 <template>
   <div class="grid-container">
-    <div v-for="item in $store.state.items" :key="item.item_id" class="grid-item">
+    <div
+      v-for="item in $store.state.items"
+      :key="item.item_id"
+      class="grid-item"
+    >
       <!-- <router-link v-bind:to="{ name: 'item' }"> -->
-      <img :src="require(`@/images/` + item.url)" alt="Image 1">
+      <img :src="require(`@/images/` + item.url)" alt="Image 1" />
       <!-- </router-link> -->
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   mounted() {
     this.collectionID = this.$store.state.currentCollection.collection_ID;
@@ -17,29 +20,29 @@ export default {
   },
   data() {
     return {
-      collectionID: ""
+      collectionID: "",
     };
   },
   methods: {
     async getItemsByCollection(collectionID) {
-      this.$store.commit('GET_ITEMS_BY_COLLECTION_ID',collectionID);
-    }
+      this.$store.commit("GET_ITEMS_BY_COLLECTION_ID", collectionID);
+    },
   },
   watch: {
-    '$store.state.currentCollection.collection_ID': {
+    "$store.state.currentCollection.collection_ID": {
       immediate: true, // Trigger the watcher immediately on component mount
       handler(newCollectionId) {
         this.collectionID = newCollectionId;
         this.getItemsByCollection(newCollectionId);
-      }
+      },
     },
-    '$store.state.items': {
+    "$store.state.items": {
       immediate: true,
       handler() {
         this.getItemsByCollection(this.collectionID);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
 

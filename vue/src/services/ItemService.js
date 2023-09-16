@@ -13,9 +13,9 @@ export default {
     },
     uploadImage(formData) {
         return axios.post(`api/Item/upload`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
         });
     },
     newItem(dto) {
@@ -30,5 +30,5 @@ export default {
     },
     deleteImage(imageName) {
         return http.delete(`api/Item/DeleteImage?imageName=${imageName}`);
-      }
+    }
 }
