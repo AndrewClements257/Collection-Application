@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
+      <router-link
+        v-bind:to="{ name: 'home' }"
+        v-if="this.$route.name == 'profile'"
+        >Home</router-link
+      >&nbsp;&nbsp;
       <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"
@@ -30,5 +34,13 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   height: 50px;
+}
+
+#nav > a {
+  color: white;
+}
+
+#nav > a:hover {
+  color: dodgerblue;
 }
 </style>

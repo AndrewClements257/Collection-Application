@@ -46,4 +46,9 @@ data() {
 .collection-list h3 {
   color: white;
 }
+
+.collection-list h3:hover {
+  color: dodgerblue;
+  cursor: pointer;
+}
 </style>

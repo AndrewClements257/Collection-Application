@@ -4,9 +4,6 @@
       <img src="../images/godzilla-1954-square.jpg" />
     </div>
     <h2>Andrew Clements</h2>
-    <h2>Andrew Clements</h2>
-    <h2>Andrew Clements</h2>
-    <h2>Andrew Clements</h2>
   </div>
 </template>
 
@@ -29,5 +26,7 @@ export default {};
 
 .user-info h2 {
   color: white;
+  font-size: 18px;
+  padding-top: 10px;
 }
 </style>
