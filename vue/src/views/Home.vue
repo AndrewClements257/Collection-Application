@@ -77,10 +77,12 @@ export default {
   display: flex;
   flex-direction: row;
   margin: 20px;
+  margin-top: 60px;
 }
 
 .collection {
   flex: 5; /* Adjust the width of user-collection */
+  margin-left: 18%;
 }
 
 .left-panel {
@@ -88,6 +90,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin-right: 10px;
+  position: fixed;
 }
 
 .left-panel>button {
