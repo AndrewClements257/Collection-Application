@@ -2,14 +2,19 @@
   <div id="app">
     <div id="nav" v-if="this.$route.name == 'home' || this.$route.name == 'item'">
       <router-link
-        v-bind:to="{ name: 'home' }"
-        v-if="this.$route.name == 'profile'"
-        >Home</router-link
-      >&nbsp;&nbsp;
-      <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"
         >Logout</router-link
+      >&nbsp;&nbsp;
+      <router-link
+        v-bind:to="{ name: 'home' }"
+        v-if="this.$route.name == 'profile' || this.$route.name == 'item'"
+        >Home</router-link
+      >
+      <router-link
+        v-bind:to="{ name: 'item' }"
+        v-if="$store.state.token != '' && this.$route.name == 'home'"
+        >Item</router-link
       >
     </div>
     <router-view />
