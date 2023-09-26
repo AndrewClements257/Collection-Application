@@ -11,11 +11,6 @@
         v-if="this.$route.name == 'profile' || this.$route.name == 'item'"
         >Home</router-link
       >
-      <router-link
-        v-bind:to="{ name: 'item' }"
-        v-if="$store.state.token != '' && this.$route.name == 'home'"
-        >Item</router-link
-      >
     </div>
     <router-view />
   </div>

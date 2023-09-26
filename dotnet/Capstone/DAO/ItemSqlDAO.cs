@@ -140,6 +140,7 @@ namespace Capstone.DAO
             item.Item_ID = Convert.ToInt32(reader["item_id"]);
             item.Name = Convert.ToString(reader["name"]);
             item.URL = Convert.ToString(reader["url"]);
+            item.Description = Convert.ToString(reader["description"]);
 
             return item;
         }

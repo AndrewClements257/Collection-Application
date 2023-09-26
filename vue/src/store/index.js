@@ -28,6 +28,13 @@ export default new Vuex.Store({
       name: '',
       user_id: '',
       collection_ID: '1'
+    },
+    currentItem: {
+      collection_ID: '',
+      item_ID: '',
+      name: '',
+      url: '',
+      description: ''
     }
   },
   mutations: {
@@ -57,6 +64,9 @@ export default new Vuex.Store({
     },
     SET_CURRENT_COLLECTION(state, collection) {
       state.currentCollection = collection;
+    },
+    SET_CURRENT_ITEM(state,item) {
+      state.currentItem = item;
     },
     async GET_ITEMS_BY_COLLECTION_ID(state, collectionID) {
       const response = await ItemService.getItemsByCollectionID(collectionID);
