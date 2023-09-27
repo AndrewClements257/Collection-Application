@@ -6,5 +6,6 @@ namespace Capstone.Models
     {
         List<Collection> GetCollections();
         bool CreateNewCollection(Collection collection);
+        bool DeleteCollection(int collection_id);
     }
 }

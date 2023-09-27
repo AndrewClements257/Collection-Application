@@ -10,5 +10,12 @@ export default {
     },
     newCollection(dto) {
         return http.post(`api/Collection`,dto);
+    },
+    deleteCollection(collection_id) {
+        return http.delete(`api/Collection`, {
+            params: {
+                collection_id: collection_id
+            }
+        });
     }
 }

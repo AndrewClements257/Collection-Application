@@ -6,6 +6,7 @@
       <button v-on:click="displayCollectionModal()">Add New Collection</button>
       <button v-on:click="displayItemModal()">Add New Item</button>
       <button v-on:click="displayDeleteItemModal()">Delete Item</button>
+      <button v-on:click="displayDeleteCollectionModal()">Delete Collection</button>
     </div>
     <div class="overlay" v-show="showingCollectionModal">
       <new-collection-modal
@@ -23,6 +24,12 @@
         @close="close"
       ></delete-item-modal>
     </div>
+    <div class="overlay" v-show="showingDeleteCollectionModal">
+      <delete-collection-modal
+        v-show="showingDeleteCollectionModal"
+        @close="close"
+      ></delete-collection-modal>
+    </div>
     <user-collection class="collection"></user-collection>
   </div>
 </template>
@@ -34,6 +41,7 @@ import CollectionsList from "../components/CollectionsList.vue";
 import NewCollectionModal from "../components/NewCollectionModal.vue";
 import NewItemModal from "../components/NewItemModal.vue";
 import DeleteItemModal from "../components/DeleteItemModal.vue";
+import DeleteCollectionModal from "../components/DeleteCollectionModal.vue"
 
 export default {
   name: "home",
@@ -44,12 +52,14 @@ export default {
     NewCollectionModal,
     NewItemModal,
     DeleteItemModal,
+    DeleteCollectionModal
   },
   data() {
     return {
       showingCollectionModal: false,
       showingItemModal: false,
       showingDeleteItemModal: false,
+      showingDeleteCollectionModal: false,
       imageUrl: "",
     };
   },
@@ -63,10 +73,14 @@ export default {
     async displayDeleteItemModal() {
       this.showingDeleteItemModal = !this.showingDeleteItemModal;
     },
+    async displayDeleteCollectionModal() {
+      this.showingDeleteCollectionModal = !this.showingCollectionModal;
+    },
     close() {
       this.showingCollectionModal = false;
       this.showingItemModal = false;
       this.showingDeleteItemModal = false;
+      this.showingDeleteCollectionModal = false;
     },
   },
 };

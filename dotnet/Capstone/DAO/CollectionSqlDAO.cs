@@ -78,6 +78,31 @@ namespace Capstone.DAO
                 return false;
             }
         }
+
+        public bool DeleteCollection(int collection_id) 
+        {
+            int rowsAffected;
+
+            try
+            {
+                using(SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand collectionCmd = new SqlCommand("DELETE FROM collection WHERE collection_id = @collection_id",conn);
+                    collectionCmd.Parameters.AddWithValue("@collection_id", collection_id);
+                    rowsAffected= collectionCmd.ExecuteNonQuery();
+                }
+                return rowsAffected == 1;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+
+        }
+
         private Collection GetCollectionFromReader(SqlDataReader reader)
         {
             Collection collection = new Collection()

@@ -26,5 +26,11 @@ namespace Capstone.Controllers
         {
             return collectionDao.CreateNewCollection(collection);
         }
+
+        [HttpDelete]
+        public bool DeleteCollection(int collection_id) 
+        {
+            return collectionDao.DeleteCollection(collection_id);
+        }
     }
 }
