@@ -1,10 +1,9 @@
 <template>
   <div id="modal-container">
-    <h1>Add New Item</h1>
-    <form @submit.prevent="createItem">
-      <label for="name">Name:</label>
-      <input type="text" id="name" v-model="newItem.name" required />
-      <br />
+    <span class="exit" @click="close">x</span>
+    <h2>Add New Item</h2>
+    <form class="newItemForm" @submit.prevent="createItem">
+      <input type="text" id="name" placeholder="Item Name" v-model="newItem.name" required />
       <label for="image">Image:</label>
       <input
         type="file"
@@ -13,10 +12,8 @@
         accept="image/*"
         required
       />
-      <br />
-      <button type="submit">Create Item</button>
+      <button type="submit" class="pickup-button">Create Item</button>
       <div v-if="showStatus" :class="statusClass">{{ uploadStatus }}</div>
-      <button class="pickup-button" @click="close">Nevermind</button>
     </form>
   </div>
 </template>
@@ -98,7 +95,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #modal-container {
   text-align: center;
   width: 100%;
@@ -111,21 +108,42 @@ export default {
   width: 90%;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
   margin: 25px;
 }
 
-.title {
+h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+input,
+button {
+  width: 75%;
+}
+
+label {
+  margin-top: 0px;
+  font-size: 24px;
+}
+
+.exit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-right: 18px;
   font-size: 25px;
-  color: white;
+  color: #c0c0c0;
+  align-content: center;
+  cursor: pointer;
 }
 
-li {
-  padding: 5px;
+.exit:hover {
+  color: red;
 }
 
-li > input {
+input {
   height: 2vw;
+  margin-bottom: 10px;
 }
 
 .pickup-button {
@@ -138,28 +156,34 @@ li > input {
   font-size: 15px;
   cursor: pointer;
   float: center;
+  margin-bottom: 15px;
 }
-.parkingSpots {
-  display: inline;
+
+.pickup-button:hover {
+  background-color: dodgerblue;
+  color: white;
 }
-.newCollectionForm {
-  width: 100%;
+
+.newItemForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media screen and (max-width: 1300px) {
-  li > input {
+  input {
     height: 4vw;
   }
 }
 
 @media screen and (max-width: 768px) {
-  li > input {
+  input {
     height: 5vw;
   }
 }
 
 @media screen and (max-width: 450px) {
-  li > input {
+  input {
     height: 9vw;
   }
 }
