@@ -3,7 +3,13 @@
     <span class="exit" @click="close">x</span>
     <h2>Add New Item</h2>
     <form class="newItemForm" @submit.prevent="createItem">
-      <input type="text" id="name" placeholder="Item Name" v-model="newItem.name" required />
+      <input
+        type="text"
+        id="name"
+        placeholder="Item Name"
+        v-model="newItem.name"
+        required
+      />
       <label for="image">Image:</label>
       <input
         type="file"

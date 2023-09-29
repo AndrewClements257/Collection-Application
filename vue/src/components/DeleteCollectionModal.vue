@@ -1,69 +1,72 @@
 <template>
-    <div id="modal-container">
-        <span class="exit" @click="close">x</span>
+  <div id="modal-container">
+    <span class="exit" @click="close">x</span>
     <h2>Delete Collection</h2>
-    <form  class="deleteCollectionForm" v-on:submit.prevent="deleteCollection()">
-        <select v-model="selectedCollectionID">
-        <option v-for="collection in $store.state.collections" :key="collection.collection_ID" :value="collection.collection_ID">
-        {{collection.name}}
+    <form class="deleteCollectionForm" v-on:submit.prevent="deleteCollection()">
+      <select v-model="selectedCollectionID">
+        <option
+          v-for="collection in $store.state.collections"
+          :key="collection.collection_ID"
+          :value="collection.collection_ID"
+        >
+          {{ collection.name }}
         </option>
-        </select>
+      </select>
       <button class="pickup-button">Delete Collection</button>
     </form>
-    </div>
+  </div>
 </template>
 
 <script>
-import CollectionService from '../services/CollectionService';
-import ItemService from '../services/ItemService';
+import CollectionService from "../services/CollectionService";
+import ItemService from "../services/ItemService";
 
 export default {
-    data() {
-        return {
-            fileName: "",
-            selectedCollectionID: null,
-            selectedCollection: {
-                "collection_ID": "",
-                "name": "",
-                "user_ID": ""
-            }
-        }
-    },
-    methods: {
-        async deleteCollection() {
-    try {
+  data() {
+    return {
+      fileName: "",
+      selectedCollectionID: null,
+      selectedCollection: {
+        collection_ID: "",
+        name: "",
+        user_ID: "",
+      },
+    };
+  },
+  methods: {
+    async deleteCollection() {
+      try {
         // Filter items in the selected collection from the store's state
         const items = this.$store.state.items.filter(
-            item => item.collection_ID === this.selectedCollectionID
+          (item) => item.collection_ID === this.selectedCollectionID
         );
 
         // Loop through each item in the collection
         for (const item of items) {
-            // Delete each item
-            await ItemService.deleteItem(item.item_ID);
-            // Delete each item's image
-            await ItemService.deleteImage(item.url);
+          // Delete each item
+          await ItemService.deleteItem(item.item_ID);
+          // Delete each item's image
+          await ItemService.deleteImage(item.url);
         }
 
         // After all items and images are deleted, delete the collection itself
         await CollectionService.deleteCollection(this.selectedCollectionID);
 
-        this.$store.commit('GET_COLLECTIONS'); 
+        this.$store.commit("GET_COLLECTIONS");
 
         // Emit close event
         this.$emit("close");
-
-    } catch (error) {
+      } catch (error) {
         console.error(error);
-    }
-},
-        close() { 
+      }
+    },
+    close() {
       this.$emit("close");
       event.preventDefault(); // Prevent form submission
-    }
     },
-    name: "delete-collection-modal",
-}
+  },
+  name: "delete-collection-modal",
+};
 </script>
 
 <style scoped>
@@ -100,7 +103,8 @@ h2 {
   margin-bottom: 20px;
 }
 
-select, button {
+select,
+button {
   width: 75%;
 }
 
@@ -116,7 +120,7 @@ select, button {
 }
 
 .exit:hover {
-  color:red;
+  color: red;
 }
 
 .pickup-button {
@@ -130,7 +134,7 @@ select, button {
   cursor: pointer;
   float: center;
   margin-top: 10px;
-  margin-bottom:15px;
+  margin-bottom: 15px;
 }
 
 .pickup-button:hover {
@@ -149,8 +153,6 @@ select, button {
     height: 4vw;
   }
 }
-
-
 
 @media screen and (max-width: 450px) {
   select {

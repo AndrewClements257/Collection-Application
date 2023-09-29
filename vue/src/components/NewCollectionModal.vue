@@ -1,43 +1,52 @@
 <template>
-    <div id="modal-container">
-        <span class="exit" @click="close">x</span>
-        <h2>New Collection</h2>
-    <form  class="newCollectionForm" action="" v-on:submit.prevent="submitNewCollection()">
-        <ul>
-            <li>
-                <input type="text" placeholder="Collection Name" v-model="newCollection.name" required>
-            </li> 
-        </ul>
+  <div id="modal-container">
+    <span class="exit" @click="close">x</span>
+    <h2>New Collection</h2>
+    <form
+      class="newCollectionForm"
+      action=""
+      v-on:submit.prevent="submitNewCollection()"
+    >
+      <ul>
+        <li>
+          <input
+            type="text"
+            placeholder="Collection Name"
+            v-model="newCollection.name"
+            required
+          />
+        </li>
+      </ul>
       <button class="pickup-button">Create Collection</button>
     </form>
-    </div>
+  </div>
 </template>
 
 <script>
-import CollectionService from '../services/CollectionService';
+import CollectionService from "../services/CollectionService";
 
 export default {
-    methods: {
-        async submitNewCollection(){
-            await CollectionService.newCollection(this.newCollection);
-            this.$emit("close");
-            this.$store.commit("GET_COLLECTIONS"); // Dispatch the GET_COLLECTIONS mutation
-            this.newCollection.name = "";
-        },
-        close() {
+  methods: {
+    async submitNewCollection() {
+      await CollectionService.newCollection(this.newCollection);
       this.$emit("close");
-    }
+      this.$store.commit("GET_COLLECTIONS"); // Dispatch the GET_COLLECTIONS mutation
+      this.newCollection.name = "";
     },
-    name: "collection-modal",
-    data() {
-        return {
-            newCollection: {
-                "user_id": this.$store.state.user.userId,
-                "name": ""
-            }
-        }
-    }
-}
+    close() {
+      this.$emit("close");
+    },
+  },
+  name: "collection-modal",
+  data() {
+    return {
+      newCollection: {
+        user_id: this.$store.state.user.userId,
+        name: "",
+      },
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -74,7 +83,8 @@ h2 {
   margin-bottom: 10px;
 }
 
-input, button {
+input,
+button {
   width: 75%;
 }
 
@@ -90,7 +100,7 @@ input, button {
 }
 
 .exit:hover {
-  color:red;
+  color: red;
 }
 
 .pickup-button {
@@ -104,7 +114,7 @@ input, button {
   cursor: pointer;
   float: center;
   margin-top: 10px;
-  margin-bottom:15px;
+  margin-bottom: 15px;
 }
 
 .pickup-button:hover {
@@ -135,5 +145,4 @@ input, button {
     height: 9vw;
   }
 }
-
 </style>

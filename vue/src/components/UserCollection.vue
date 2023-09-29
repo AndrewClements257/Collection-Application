@@ -6,7 +6,11 @@
       class="grid-item"
     >
       <router-link v-bind:to="{ name: 'item' }">
-        <img :src="require(`@/images/` + item.url)" alt="Image 1" @click="setCurrentItem(item)"/>
+        <img
+          :src="require(`@/images/` + item.url)"
+          alt="Image 1"
+          @click="setCurrentItem(item)"
+        />
       </router-link>
     </div>
   </div>
@@ -29,7 +33,7 @@ export default {
     },
     setCurrentItem(item) {
       this.$store.commit("SET_CURRENT_ITEM", item);
-    }
+    },
   },
   watch: {
     "$store.state.currentCollection.collection_ID": {

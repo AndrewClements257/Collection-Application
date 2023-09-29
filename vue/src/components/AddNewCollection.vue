@@ -6,23 +6,22 @@
 </template>
 
 <script>
-
-import NewCollectionModal from './NewCollectionModal.vue';
+import NewCollectionModal from "./NewCollectionModal.vue";
 
 export default {
   components: { NewCollectionModal },
   data() {
-    return{
-    showingCollectionModal: false
-    }
+    return {
+      showingCollectionModal: false,
+    };
   },
-methods: {
-  async displayCollectionModal() {
-    this.showingCollectionModal = !this.showingCollectionModal;
+  methods: {
+    async displayCollectionModal() {
+      this.showingCollectionModal = !this.showingCollectionModal;
+    },
   },
-},
-name: "new-collection",
-}
+  name: "new-collection",
+};
 </script>
 
 <style>
