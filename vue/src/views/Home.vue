@@ -96,14 +96,15 @@ export default {
 
 .collection {
   flex: 5; /* Adjust the width of user-collection */
-  margin-left: 18%;
+  margin-left: 22%;
+  width: 75%;
 }
 
 .left-panel {
-  flex: 1;
   display: flex;
   flex-direction: column;
   margin-right: 10px;
+  width: 20%;
   position: fixed;
 }
 
@@ -136,5 +137,25 @@ export default {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 9999;
+} 
+
+@media screen and (max-width: 800px) {
+
+.home {
+  width: 95%;
+  flex-direction: column;
+}
+
+.left-panel {
+  position: relative;
+  width: 95%;
+}
+
+.collection {
+  width: 95%;
+  margin-left: 0px;
+  margin-top: 20px;
+}
+
 }
 </style>
