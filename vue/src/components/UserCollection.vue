@@ -71,4 +71,18 @@ export default {
   max-width: 100%; /* Limit the image width to the container */
   max-height: 100%; /* Limit the image height to the container */
 }
+
+/* Media query for screen width between 800px and 501px */
+@media (max-width: 800px) and (min-width: 501px) {
+  .grid-item {
+    flex-basis: calc(50% - 10px); /* Adjust the width to make it 2 in a row */
+  }
+}
+
+/* Media query for screen width 500px and below */
+@media (max-width: 500px) {
+  .grid-item {
+    flex-basis: calc(100%); /* Adjust the width to make it 1 in a row */
+  }
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="left-panel">
+    <div class="left-panel" v-if="isScreenWidthLarge">
       <user-info class="info"></user-info>
       <collections-list class="list"></collections-list>
       <button v-on:click="displayCollectionModal()">Add New Collection</button>
@@ -30,6 +30,7 @@
         @close="close"
       ></delete-collection-modal>
     </div>
+    <h1 v-if="!isScreenWidthLarge" class="collection-name">{{ $store.state.currentCollection.name }} </h1>
     <user-collection class="collection"></user-collection>
   </div>
 </template>
@@ -61,6 +62,7 @@ export default {
       showingDeleteItemModal: false,
       showingDeleteCollectionModal: false,
       imageUrl: "",
+      screenWidth: window.innerWidth
     };
   },
   methods: {
@@ -82,6 +84,23 @@ export default {
       this.showingDeleteItemModal = false;
       this.showingDeleteCollectionModal = false;
     },
+    updateScreenWidth() {
+      this.screenWidth = window.innerWidth;
+    }
+  },
+  computed: {
+    isScreenWidthLarge() {
+      // Change 800 to your desired breakpoint
+      return this.screenWidth > 800;
+    }
+  },
+  created() {
+    // Add event listener to update screenWidth when the window is resized
+    window.addEventListener('resize', this.updateScreenWidth);
+  },
+  destroyed() {
+    // Remove event listener when the component is destroyed
+    window.removeEventListener('resize', this.updateScreenWidth);
   },
 };
 </script>
@@ -139,11 +158,18 @@ export default {
   z-index: 9999;
 } 
 
+.collection-name {
+  margin: auto;
+  font-size: 50px;
+}
+
 @media screen and (max-width: 800px) {
 
 .home {
-  width: 95%;
+  width: 100%;
   flex-direction: column;
+  margin: auto;
+  margin-top: 50px;
 }
 
 .left-panel {
@@ -152,8 +178,8 @@ export default {
 }
 
 .collection {
-  width: 95%;
-  margin-left: 0px;
+  width: 90%;
+  margin: auto;
   margin-top: 20px;
 }
 
