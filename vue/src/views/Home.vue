@@ -8,6 +8,16 @@
       <button v-on:click="displayDeleteItemModal()">Delete Item</button>
       <button v-on:click="displayDeleteCollectionModal()">Delete Collection</button>
     </div>
+     <div class="mobile-menu" v-bind:class="{ open: menuOpen }">
+      <user-info class="info"></user-info>
+      <collections-list class="list"></collections-list>
+      <div class="mobile-buttons">
+      <button v-on:click="displayCollectionModal()">Add New Collection</button>
+      <button v-on:click="displayItemModal()">Add New Item</button>
+      <button v-on:click="displayDeleteItemModal()">Delete Item</button>
+      <button v-on:click="displayDeleteCollectionModal()">Delete Collection</button>
+     </div>
+    </div>
     <div class="overlay" v-show="showingCollectionModal">
       <new-collection-modal
         v-show="showingCollectionModal"
@@ -42,7 +52,7 @@ import CollectionsList from "../components/CollectionsList.vue";
 import NewCollectionModal from "../components/NewCollectionModal.vue";
 import NewItemModal from "../components/NewItemModal.vue";
 import DeleteItemModal from "../components/DeleteItemModal.vue";
-import DeleteCollectionModal from "../components/DeleteCollectionModal.vue"
+import DeleteCollectionModal from "../components/DeleteCollectionModal.vue";
 
 export default {
   name: "home",
@@ -53,7 +63,7 @@ export default {
     NewCollectionModal,
     NewItemModal,
     DeleteItemModal,
-    DeleteCollectionModal
+    DeleteCollectionModal,
   },
   data() {
     return {
@@ -62,7 +72,7 @@ export default {
       showingDeleteItemModal: false,
       showingDeleteCollectionModal: false,
       imageUrl: "",
-      screenWidth: window.innerWidth
+      screenWidth: window.innerWidth,
     };
   },
   methods: {
@@ -86,21 +96,30 @@ export default {
     },
     updateScreenWidth() {
       this.screenWidth = window.innerWidth;
-    }
+    },
+    toggleMenu() {
+      this.$emit("toggleMenu");
+    },
   },
   computed: {
     isScreenWidthLarge() {
       // Change 800 to your desired breakpoint
       return this.screenWidth > 800;
-    }
+    },
   },
   created() {
     // Add event listener to update screenWidth when the window is resized
-    window.addEventListener('resize', this.updateScreenWidth);
+    window.addEventListener("resize", this.updateScreenWidth);
   },
   destroyed() {
     // Remove event listener when the component is destroyed
-    window.removeEventListener('resize', this.updateScreenWidth);
+    window.removeEventListener("resize", this.updateScreenWidth);
+  },
+  props: {
+    menuOpen: {
+      type: Boolean,
+      required: true,
+    },
   },
 };
 </script>
@@ -119,6 +138,45 @@ export default {
   width: 75%;
 }
 
+/* Initial styles */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -100%; /* Initially positioned off the screen */
+  width: 100%;
+  height: 100%;
+  background: #333;
+  transition: left 0.3s;
+  overflow-y: auto; /* for longer menus */
+  color: #fff;
+  padding-top: 50px;
+}
+
+.mobile-menu a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Class that will be toggled */
+.mobile-menu.open {
+  left: 0;
+}
+
+.mobile-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-buttons button {
+  margin-top: 10px;
+  padding: 5px;
+}
+
 .left-panel {
   display: flex;
   flex-direction: column;
@@ -127,14 +185,14 @@ export default {
   position: fixed;
 }
 
-.left-panel>button {
+.left-panel > button {
   margin-bottom: 5px;
   padding: 7px;
   border-radius: 5px;
   border: none;
 }
 
-.left-panel>button:hover {
+.left-panel > button:hover {
   background-color: dodgerblue;
   color: white;
   cursor: pointer;
@@ -156,7 +214,7 @@ export default {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 9999;
-} 
+}
 
 .collection-name {
   margin: auto;
@@ -164,24 +222,22 @@ export default {
 }
 
 @media screen and (max-width: 800px) {
+  .home {
+    width: 100%;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 50px;
+  }
 
-.home {
-  width: 100%;
-  flex-direction: column;
-  margin: auto;
-  margin-top: 50px;
-}
+  .left-panel {
+    position: relative;
+    width: 95%;
+  }
 
-.left-panel {
-  position: relative;
-  width: 95%;
-}
-
-.collection {
-  width: 90%;
-  margin: auto;
-  margin-top: 20px;
-}
-
+  .collection {
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+  }
 }
 </style>

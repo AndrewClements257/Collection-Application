@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <div id="nav" v-if="this.$route.name == 'home' || this.$route.name == 'item'">
+      <button class="menu" @click="toggleMenu()">☰</button>
+      <div>
       <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"
@@ -11,10 +13,27 @@
         v-if="this.$route.name == 'profile' || this.$route.name == 'item'"
         >Home</router-link
       >
+      </div>
     </div>
-    <router-view />
+    <router-view :menuOpen="menuOpen" @toggleMenu="toggleMenu"></router-view>
   </div>
 </template>
+
+<script>
+
+export default {
+  data() {
+    return {
+      menuOpen: false
+    }
+  },
+  methods: {
+    toggleMenu() {
+      this.menuOpen = !this.menuOpen;
+    }
+  }
+};
+</script>
 
 <style scoped>
 #app {
@@ -34,6 +53,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   padding: 0 20px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -44,11 +64,16 @@
   z-index: 10000;
 }
 
-#nav > a {
+a {
   color: white;
 }
 
-#nav > a:hover {
+a:hover {
+  color: dodgerblue;
+}
+
+.menu:hover {
+  cursor: pointer;
   color: dodgerblue;
 }
 </style>
