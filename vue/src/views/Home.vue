@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="left-panel" v-if="isScreenWidthLarge">
-      <user-info class="info"></user-info>
+      <user-info></user-info>
       <collections-list class="list"></collections-list>
       <button v-on:click="displayCollectionModal()">Add New Collection</button>
       <button v-on:click="displayItemModal()">Add New Item</button>
@@ -10,7 +10,7 @@
     </div>
      <div class="mobile-menu" v-bind:class="{ open: menuOpen }">
       <user-info class="info"></user-info>
-      <collections-list class="list"></collections-list>
+      <collections-list class="list-mobile"></collections-list>
       <div class="mobile-buttons">
       <button v-on:click="displayCollectionModal()">Add New Collection</button>
       <button v-on:click="displayItemModal()">Add New Item</button>
@@ -170,11 +170,13 @@ export default {
 .mobile-buttons {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .mobile-buttons button {
   margin-top: 10px;
   padding: 5px;
+  width: 33%;
 }
 
 .left-panel {
@@ -203,6 +205,13 @@ export default {
   margin-bottom: 10px;
 }
 
+.list-mobile {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: none;
+  border: none;
+}
+
 .overlay {
   position: fixed;
   top: 0;
@@ -219,6 +228,11 @@ export default {
 .collection-name {
   margin: auto;
   font-size: 50px;
+}
+
+.info {
+  background: none;
+  border: none;
 }
 
 @media screen and (max-width: 800px) {

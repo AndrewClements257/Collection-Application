@@ -29,4 +29,8 @@ export default {};
   font-size: 18px;
   padding-top: 10px;
 }
+
+.user-img img {
+  border-radius: 150px;
+}
 </style>
